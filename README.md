@@ -1,7 +1,7 @@
 # BulkDownloadDiscordMessages
 download up to all the messages from a discord server
 
-the program requires three arguments run with
+the program requires four arguments
 
 `python download.py most_recent_msg_id channel_id auth_code how_many`
 
