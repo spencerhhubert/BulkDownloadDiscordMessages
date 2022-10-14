@@ -2,9 +2,21 @@ import requests, sys
 from sys import argv
 
 most_recent_id = argv[1]
-auth = argv[2]
-channel_id = argv[3]
+channel_id = argv[2]
+auth = argv[3]
+how_many = 1000
 how_many = int(argv[4])
+
+def checkArgs():
+    if len(auth) != 70:
+        print("Authorization code is incorrect length")
+        exit()
+    if len(most_recent_id) != 19:
+        print("Most recent id is incorrect length")
+        exit()
+    if len(channel_id) != 18:
+        print("Channel id is incorrect length")
+        exit()
 
 def getMsgs(from_id):
     base = "https://discord.com/api/v10"
@@ -26,6 +38,7 @@ def getLots(from_id, how_many):
         msgs += batch
     return msgs
 
+checkArgs()
 all_msgs = getLots(most_recent_id, how_many)
 
 for msg in reversed(all_msgs): 
