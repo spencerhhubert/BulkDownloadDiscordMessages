@@ -1,11 +1,16 @@
-import requests, sys
+import requests
 from sys import argv
 
-most_recent_id = argv[1]
-channel_id = argv[2]
-auth = argv[3]
-how_many = 1000
-how_many = int(argv[4])
+def setupArgs():
+    if len(argv) != 5:
+        print("Not enough arguments")
+        exit()
+    most_recent_id = argv[1]
+    channel_id = argv[2]
+    auth = argv[3]
+    how_many = 1000
+    how_many = int(argv[4])
+    checkArgs()
 
 def checkArgs():
     if len(auth) != 70:
@@ -38,10 +43,11 @@ def getLots(from_id, how_many):
         msgs += batch
     return msgs
 
-checkArgs()
-all_msgs = getLots(most_recent_id, how_many)
+if __name__ == "__main__":
+    setupArgs()
+    all_msgs = getLots(most_recent_id, how_many)
 
-for msg in reversed(all_msgs): 
-    print(msg["content"],'\n')
+    for msg in reversed(all_msgs): 
+        print(msg["content"],'\n')
 
-print(len(all_msgs))
+    print(f"got {len(all_msgs)} messages")
